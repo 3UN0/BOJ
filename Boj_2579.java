@@ -3,50 +3,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Boj_2579 {
-	public static int[] arr;
-	public static Integer[] dp;
+	public static Integer[] dp;	// ëˆ„ì í•©
+	public static int[] arr;	// ê³„ë‹¨ ê°’
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
-		arr = new int[N+1];
 		dp = new Integer[N+1];
+		arr = new int[N+1];
+		
+		for(int i=1;i<=N;i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+		}
 		
 		dp[0] = 0;
-		dp[1] = 0;
-		dp[2] = 1;
+		dp[1] = arr[1];
 		
-		
-/*		if(N>=2) {	// µÎ ¹øÂ° °è´ÜÀº ¹«Á¶°Ç Ã¹ °è´Ü->µÎ ¹øÂ° °è´Ü ÀÌ¹Ç·Î (Ã¹ °ª + µÎ ¹øÂ° °ª)
+		if(N>=2) { // ë‘ ë²ˆì§¸ ê³„ë‹¨ì€ ë¬´ì¡°ê±´ ì²« ê³„ë‹¨->ë‘ ë²ˆì§¸ ê³„ë‹¨ ì´ë¯€ë¡œ (ì²« ê°’ + ë‘ ë²ˆì§¸ ê°’)
 			dp[2] = arr[1] + arr[2];
 		}
-*/		
-		// BOTTOM-UP ¹æ½ÄÀÏ ¶§ -> for¹®À¸·Î ÀÛÀº¹®Á¦ºÎÅÍ Å«¹®Á¦·Î Ç®ÀÌ
-		/*for(int i=3;i<=N;i++) {
+		
+		// BOTTOM-UP ë°©ì‹ì¼ ë•Œ -> forë¬¸ìœ¼ë¡œ ì‘ì€ë¬¸ì œë¶€í„° í°ë¬¸ì œë¡œ í’€ì´
+		// ì´ì „ ê³„ë‹¨  dp ê°’ê³¼  ë‘ì¹¸ì„ ë„˜ì–´ì„œ ë„ë‹¬í•  ê²½ìš° ë¹„êµ
+		for(int i=3;i<=N;i++) {
 			dp[i] = Math.max(dp[i-2], dp[i-3] + arr[i-1]) + arr[i];
-		}*/
-		
-		
-		System.out.println(one(N));
-		
-	}
-	
-	
-	public static int one(int n) {
-		if(dp[n] == null) {
-			if(n/6 == 0) {	// 6À¸·Î ³ª´²Áö´Â °æ¿ì
-				dp[n] = Math.min(one(n-1), Math.min(one(n/3), one(n/2)));
-			}
-			else if(n/3 == 0) {	// 3À¸·Î¸¸ ³ª´²Áö´Â °æ¿ì
-				dp[n] = Math.min(one(n/3), one(n-1));
-			} else if(n/2 == 0) {	// 2·Î¸¸ ³ª´²Áö´Â °æ¿ì
-				dp[n] = Math.min(one(n/2), one(n-1));
-			} else	// ±×¿Ü
-				dp[n] = one(n-1);
 		}
-		return dp[n];
+		
+		System.out.println(dp[N]);
+		
 	}
-	
-	
 }
 		
