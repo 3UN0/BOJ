@@ -8,7 +8,7 @@ public class Test {
 	public static int[][] map;
 	public static int count;
 	public static int[] dx = {-1, 0, 1, 0};	// 북0 동1 남2 서3
-	public static int[] dy = {0, -1, 0, 1};
+	public static int[] dy = {0, 1, 0, -1};
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,7 +16,7 @@ public class Test {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
-		map = new int[N][N];
+		map = new int[N][M];
 		
 		st = new StringTokenizer(br.readLine());
 		r = Integer.parseInt(st.nextToken());
@@ -35,8 +35,6 @@ public class Test {
 		dfs(r, c, d);
 		
 		System.out.println(count);
-		
-		
 	}
 	
 	public static void dfs(int x, int y, int d) {
@@ -51,6 +49,7 @@ public class Test {
 		boolean flag = false;
 		
 		for(int i=0;i<4;i++) {
+			//int nd = (d+3)%4;
 			d = direction(d);
 			int nx = x + dx[d];
 			int ny = y + dy[d];
@@ -67,20 +66,23 @@ public class Test {
 		
 		// 4방향 모두 청소 or 벽
 		if(flag == false) {
-			System.out.println("후진할때 현재 방향 : " +d);
-			int nd = (d + 2) % 4;
-			int nx = x + dx[nd];
-			int ny = y + dy[nd];
+			// System.out.println("후진할때 현재 방향 : " +d);
+			// 뒤쪽 위치를 파라미터로 넘겨줌 (ex. 동1 -> 서3)
+			//int bd = (d + 2) % 4;
+			//int bx = x + dx[bd];
+			//int by = y + dy[bd];
+			int bx = x - dx[d];
+			int by = y - dy[d];
 			
-			if(nx > 0 && nx < N && ny > 0 && ny < M) {
+			if(bx > 0 && bx < N && by > 0 && by < M) {
 				// 청소한 곳(2)도 지나가도 됨 (벽만 아니면 됨)
-				if(map[nx][ny] != 1) {
-					dfs(nx, ny, d);
+				if(map[bx][by] != 1) {
+					dfs(bx, by, d);
 				}
 			}
 		}
-		
 	}
+	
 	public static int direction(int d) {
 		// 북 -> 서 
 		if(d == 0)
@@ -98,6 +100,5 @@ public class Test {
 		else
 			return 2;
 	}
-	
 	
 }
