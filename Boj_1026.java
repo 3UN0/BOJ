@@ -34,7 +34,6 @@ public class Boj_1026 {
 		}
 		
 		System.out.print(sum);
-		
 	}
 }
 
