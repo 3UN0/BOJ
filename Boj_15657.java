@@ -44,6 +44,6 @@ public class Boj_15657 {
 			temp[r] = arr[i];
 			permu(temp, n, r+1, i);
 		}
-		
+	
 	}
 }
